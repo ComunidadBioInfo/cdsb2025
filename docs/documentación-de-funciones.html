@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Documentación de funciones | Creación de paquetes de R/Bioconductor para el análisis de metagenomas.</title>
+  <meta name="description" content="5 Documentación de funciones | Creación de paquetes de R/Bioconductor para el análisis de metagenomas." />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Documentación de funciones | Creación de paquetes de R/Bioconductor para el análisis de metagenomas." />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="comunidadbioinfo/cdsb2025" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Documentación de funciones | Creación de paquetes de R/Bioconductor para el análisis de metagenomas." />
+  
+  
+  
+
+<meta name="author" content="Dra. Mirna Vázquez Rosas-Landa, Dra. Joselyn Cristina Chávez Fuentes, M.C. Erick Cuevas Fernández" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="creando-mis-primeras-funciones.html"/>
+<link rel="next" href="diseño-de-pruebas.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Bienvenida</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#instructores"><i class="fa fa-check"></i><b>0.1</b> Instructores</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#ayudantes"><i class="fa fa-check"></i><b>0.2</b> Ayudantes</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#temario"><i class="fa fa-check"></i><b>0.3</b> Temario</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#patrocinadores"><i class="fa fa-check"></i><b>0.4</b> Patrocinadores</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#licencia"><i class="fa fa-check"></i><b>0.5</b> Licencia</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="keynote.html"><a href="keynote.html"><i class="fa fa-check"></i><b>1</b> Keynote</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="keynote.html"><a href="keynote.html#diapositivas"><i class="fa fa-check"></i><b>1.1</b> Diapositivas</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html"><i class="fa fa-check"></i><b>2</b> Control de versiones con GitHub y RStudio</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#diapositivas-1"><i class="fa fa-check"></i><b>2.1</b> Diapositivas</a></li>
+<li class="chapter" data-level="2.2" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#por-qué-hacer-control-de-versiones-de-nuestros-proyectos"><i class="fa fa-check"></i><b>2.2</b> ¿Por qué hacer control de versiones de nuestros proyectos?</a></li>
+<li class="chapter" data-level="2.3" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#git"><i class="fa fa-check"></i><b>2.3</b> Git</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#git-vs-controles-de-versión-a-mano"><i class="fa fa-check"></i><b>2.3.1</b> <strong>Git vs controles de versión a mano</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#recomendaciones-para-sus-proyectos"><i class="fa fa-check"></i><b>2.4</b> Recomendaciones para sus proyectos</a></li>
+<li class="chapter" data-level="2.5" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#proyectos-colaborativos"><i class="fa fa-check"></i><b>2.5</b> Proyectos colaborativos</a></li>
+<li class="chapter" data-level="2.6" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#github"><i class="fa fa-check"></i><b>2.6</b> GitHub</a></li>
+<li class="chapter" data-level="2.7" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#manual-de-sobreviviencia-con-git-y-github-en-rstudio-en-caso-de-ser-necesario"><i class="fa fa-check"></i><b>2.7</b> Manual de sobreviviencia con Git Y GitHub en RStudio (en caso de ser necesario)</a></li>
+<li class="chapter" data-level="2.8" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#cómo-clonar-un-repositorio-y-tener-conecciónpermisos-para-modificarlo"><i class="fa fa-check"></i><b>2.8</b> Cómo clonar un repositorio y tener conección/permisos para modificarlo?</a></li>
+<li class="chapter" data-level="2.9" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#credenciales-https-en-cache"><i class="fa fa-check"></i><b>2.9</b> Credenciales HTTPS en <strong>Cache</strong></a>
+<ul>
+<li class="chapter" data-level="2.9.1" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#actividad"><i class="fa fa-check"></i><b>2.9.1</b> Actividad</a></li>
+</ul></li>
+<li class="chapter" data-level="2.10" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#conectando-rstudio-con-git-y-github."><i class="fa fa-check"></i><b>2.10</b> Conectando RStudio con Git y Github.</a></li>
+<li class="chapter" data-level="2.11" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#github-primero-rstudio-después"><i class="fa fa-check"></i><b>2.11</b> GitHub primero, RStudio después…</a>
+<ul>
+<li class="chapter" data-level="2.11.1" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#actividad-1"><i class="fa fa-check"></i><b>2.11.1</b> Actividad</a></li>
+<li class="chapter" data-level="2.11.2" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#comentar-pull-y-push"><i class="fa fa-check"></i><b>2.11.2</b> Comentar, pull y push</a></li>
+</ul></li>
+<li class="chapter" data-level="2.12" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#rmarkdown-en-github"><i class="fa fa-check"></i><b>2.12</b> Rmarkdown en GitHub</a>
+<ul>
+<li class="chapter" data-level="2.12.1" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#actividad-2"><i class="fa fa-check"></i><b>2.12.1</b> Actividad</a></li>
+</ul></li>
+<li class="chapter" data-level="2.13" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#rstudio-primero-y-github-también"><i class="fa fa-check"></i><b>2.13</b> RStudio primero y GitHub también</a></li>
+<li class="chapter" data-level="2.14" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#proyecto-existente-github-al-final"><i class="fa fa-check"></i><b>2.14</b> Proyecto existente, GitHub al final</a>
+<ul>
+<li class="chapter" data-level="2.14.1" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#breviario-cultural-con-los-pats"><i class="fa fa-check"></i><b>2.14.1</b> Breviario cultural con los PATs</a></li>
+</ul></li>
+<li class="chapter" data-level="2.15" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#git-basics-commands"><i class="fa fa-check"></i><b>2.15</b> Git basics: commands</a></li>
+<li class="chapter" data-level="2.16" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#merge-conflics"><i class="fa fa-check"></i><b>2.16</b> Merge conflics</a></li>
+<li class="chapter" data-level="2.17" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#merge-conflics-1"><i class="fa fa-check"></i><b>2.17</b> Merge conflics</a></li>
+<li class="chapter" data-level="2.18" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#en-resumen"><i class="fa fa-check"></i><b>2.18</b> En resumen</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="creando-la-infraestructura-de-un-paquete.html"><a href="creando-la-infraestructura-de-un-paquete.html"><i class="fa fa-check"></i><b>3</b> Creando la infraestructura de un paquete</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="creando-la-infraestructura-de-un-paquete.html"><a href="creando-la-infraestructura-de-un-paquete.html#diapositivas-2"><i class="fa fa-check"></i><b>3.1</b> Diapositivas</a></li>
+<li class="chapter" data-level="3.2" data-path="creando-la-infraestructura-de-un-paquete.html"><a href="creando-la-infraestructura-de-un-paquete.html#los-primeros-pasos"><i class="fa fa-check"></i><b>3.2</b> Los primeros pasos</a></li>
+<li class="chapter" data-level="3.3" data-path="creando-la-infraestructura-de-un-paquete.html"><a href="creando-la-infraestructura-de-un-paquete.html#checks"><i class="fa fa-check"></i><b>3.3</b> Checks</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="creando-la-infraestructura-de-un-paquete.html"><a href="creando-la-infraestructura-de-un-paquete.html#bioccheck"><i class="fa fa-check"></i><b>3.3.1</b> BiocCheck</a></li>
+<li class="chapter" data-level="3.3.2" data-path="creando-la-infraestructura-de-un-paquete.html"><a href="creando-la-infraestructura-de-un-paquete.html#rcmdcheck"><i class="fa fa-check"></i><b>3.3.2</b> rcmdcheck</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="creando-la-infraestructura-de-un-paquete.html"><a href="creando-la-infraestructura-de-un-paquete.html#modificando-el-archivo-description"><i class="fa fa-check"></i><b>3.4</b> Modificando el archivo DESCRIPTION</a></li>
+<li class="chapter" data-level="3.5" data-path="creando-la-infraestructura-de-un-paquete.html"><a href="creando-la-infraestructura-de-un-paquete.html#modificando-el-archivo-news"><i class="fa fa-check"></i><b>3.5</b> Modificando el archivo NEWS</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="creando-mis-primeras-funciones.html"><a href="creando-mis-primeras-funciones.html"><i class="fa fa-check"></i><b>4</b> Creando mis primeras funciones</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="creando-mis-primeras-funciones.html"><a href="creando-mis-primeras-funciones.html#diapositivas-3"><i class="fa fa-check"></i><b>4.1</b> Diapositivas</a></li>
+<li class="chapter" data-level="4.2" data-path="creando-mis-primeras-funciones.html"><a href="creando-mis-primeras-funciones.html#nombre-de-la-función"><i class="fa fa-check"></i><b>4.2</b> Nombre de la función</a></li>
+<li class="chapter" data-level="4.3" data-path="creando-mis-primeras-funciones.html"><a href="creando-mis-primeras-funciones.html#estructura-de-la-función"><i class="fa fa-check"></i><b>4.3</b> Estructura de la función</a></li>
+<li class="chapter" data-level="4.4" data-path="creando-mis-primeras-funciones.html"><a href="creando-mis-primeras-funciones.html#tu-turno"><i class="fa fa-check"></i><b>4.4</b> ¡Tu turno!</a></li>
+<li class="chapter" data-level="4.5" data-path="creando-mis-primeras-funciones.html"><a href="creando-mis-primeras-funciones.html#argumentos"><i class="fa fa-check"></i><b>4.5</b> Argumentos</a></li>
+<li class="chapter" data-level="4.6" data-path="creando-mis-primeras-funciones.html"><a href="creando-mis-primeras-funciones.html#tu-turno-1"><i class="fa fa-check"></i><b>4.6</b> ¡Tu turno!</a></li>
+<li class="chapter" data-level="4.7" data-path="creando-mis-primeras-funciones.html"><a href="creando-mis-primeras-funciones.html#indentación"><i class="fa fa-check"></i><b>4.7</b> Indentación</a></li>
+<li class="chapter" data-level="4.8" data-path="creando-mis-primeras-funciones.html"><a href="creando-mis-primeras-funciones.html#uso-de-espacios"><i class="fa fa-check"></i><b>4.8</b> Uso de espacios</a></li>
+<li class="chapter" data-level="4.9" data-path="creando-mis-primeras-funciones.html"><a href="creando-mis-primeras-funciones.html#comentarios"><i class="fa fa-check"></i><b>4.9</b> Comentarios</a></li>
+<li class="chapter" data-level="4.10" data-path="creando-mis-primeras-funciones.html"><a href="creando-mis-primeras-funciones.html#mensajes-para-el-usuario"><i class="fa fa-check"></i><b>4.10</b> Mensajes para el usuario</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="documentación-de-funciones.html"><a href="documentación-de-funciones.html"><i class="fa fa-check"></i><b>5</b> Documentación de funciones</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="documentación-de-funciones.html"><a href="documentación-de-funciones.html#diapositivas-4"><i class="fa fa-check"></i><b>5.1</b> Diapositivas</a></li>
+<li class="chapter" data-level="5.2" data-path="documentación-de-funciones.html"><a href="documentación-de-funciones.html#links-importantes"><i class="fa fa-check"></i><b>5.2</b> Links importantes:</a></li>
+<li class="chapter" data-level="5.3" data-path="documentación-de-funciones.html"><a href="documentación-de-funciones.html#qué-es-la-documentación-de-una-función-y-por-qué-es-importante"><i class="fa fa-check"></i><b>5.3</b> ¿Qué es la documentación de una función y por qué es importante?</a></li>
+<li class="chapter" data-level="5.4" data-path="documentación-de-funciones.html"><a href="documentación-de-funciones.html#generacion-de-la-documentacion-con-ayuda-del-paquete-roxygen"><i class="fa fa-check"></i><b>5.4</b> Generacion de la documentacion con ayuda del paquete roxygen</a></li>
+<li class="chapter" data-level="5.5" data-path="documentación-de-funciones.html"><a href="documentación-de-funciones.html#antes-de-empezar"><i class="fa fa-check"></i><b>5.5</b> Antes de empezar…✏️</a></li>
+<li class="chapter" data-level="5.6" data-path="documentación-de-funciones.html"><a href="documentación-de-funciones.html#generacion-de-un-bloque-de-documentacion-con-ayuda-del-paquete-roxygen."><i class="fa fa-check"></i><b>5.6</b> Generacion de un bloque de documentacion con ayuda del paquete roxygen.</a></li>
+<li class="chapter" data-level="5.7" data-path="documentación-de-funciones.html"><a href="documentación-de-funciones.html#otros-campos-de-la-documentacion."><i class="fa fa-check"></i><b>5.7</b> Otros campos de la documentacion.</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="diseño-de-pruebas.html"><a href="diseño-de-pruebas.html"><i class="fa fa-check"></i><b>6</b> Diseño de pruebas</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="diseño-de-pruebas.html"><a href="diseño-de-pruebas.html#diapositivas-5"><i class="fa fa-check"></i><b>6.1</b> Diapositivas</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="creación-de-viñetas.html"><a href="creación-de-viñetas.html"><i class="fa fa-check"></i><b>7</b> Creación de viñetas</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="creación-de-viñetas.html"><a href="creación-de-viñetas.html#qué-es-una-viñetavignette"><i class="fa fa-check"></i><b>7.1</b> ¿Qué es una viñeta/vignette? 📝✨</a></li>
+<li class="chapter" data-level="7.2" data-path="creación-de-viñetas.html"><a href="creación-de-viñetas.html#características-de-una-vignette"><i class="fa fa-check"></i><b>7.2</b> Características de una vignette 🌟</a></li>
+<li class="chapter" data-level="7.3" data-path="creación-de-viñetas.html"><a href="creación-de-viñetas.html#cómo-consultar-la-viñeta-de-un-paquete"><i class="fa fa-check"></i><b>7.3</b> ¿Cómo consultar la viñeta de un paquete? ❓🔍</a></li>
+<li class="chapter" data-level="7.4" data-path="creación-de-viñetas.html"><a href="creación-de-viñetas.html#cómo-crear-una-viñeta"><i class="fa fa-check"></i><b>7.4</b> ¿Cómo crear una viñeta? ❓🔍</a></li>
+<li class="chapter" data-level="7.5" data-path="creación-de-viñetas.html"><a href="creación-de-viñetas.html#cómo-guardar-y-actualizar-la-viñeta"><i class="fa fa-check"></i><b>7.5</b> ¿Cómo guardar y actualizar la viñeta? 🔄💻</a></li>
+<li class="chapter" data-level="7.6" data-path="creación-de-viñetas.html"><a href="creación-de-viñetas.html#veamos-un-ejemplo"><i class="fa fa-check"></i><b>7.6</b> Veamos un ejemplo 🔍👨‍💻</a></li>
+<li class="chapter" data-level="7.7" data-path="creación-de-viñetas.html"><a href="creación-de-viñetas.html#actividad-3"><i class="fa fa-check"></i><b>7.7</b> Actividad</a>
+<ul>
+<li class="chapter" data-level="7.7.1" data-path="creación-de-viñetas.html"><a href="creación-de-viñetas.html#ejercicio-1-identificación-de-viñetas-en-paquetes-de-interés-en-bioconductor"><i class="fa fa-check"></i><b>7.7.1</b> Ejercicio 1: Identificación de viñetas en paquetes de interés en Bioconductor 📚🔍</a></li>
+<li class="chapter" data-level="7.7.2" data-path="creación-de-viñetas.html"><a href="creación-de-viñetas.html#ejercicio-2-creación-de-viñetas-en-r"><i class="fa fa-check"></i><b>7.7.2</b> Ejercicio 2: Creación de viñetas en R 🛠️📄</a></li>
+<li class="chapter" data-level="7.7.3" data-path="creación-de-viñetas.html"><a href="creación-de-viñetas.html#preguntas-de-reflexión"><i class="fa fa-check"></i><b>7.7.3</b> Preguntas de Reflexión 🤔💭</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="introducción-a-conda..html"><a href="introducción-a-conda..html"><i class="fa fa-check"></i><b>8</b> Introducción a Conda.</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="introducción-a-conda..html"><a href="introducción-a-conda..html#qué-es-conda"><i class="fa fa-check"></i><b>8.1</b> ¿Qué es conda?</a></li>
+<li class="chapter" data-level="8.2" data-path="introducción-a-conda..html"><a href="introducción-a-conda..html#conda-101"><i class="fa fa-check"></i><b>8.2</b> <code>conda</code> 101</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="el-grupo-de-datos.html"><a href="el-grupo-de-datos.html"><i class="fa fa-check"></i><b>9</b> El grupo de datos</a>
+<ul>
+<li class="chapter" data-level="9.0.1" data-path="el-grupo-de-datos.html"><a href="el-grupo-de-datos.html#datos"><i class="fa fa-check"></i><b>9.0.1</b> Datos</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html"><i class="fa fa-check"></i><b>10</b> Mapeo y Binning</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#secuenciación"><i class="fa fa-check"></i><b>10.1</b> Secuenciación</a></li>
+<li class="chapter" data-level="10.2" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#control-de-calidad"><i class="fa fa-check"></i><b>10.2</b> Control de calidad</a></li>
+<li class="chapter" data-level="10.3" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#ensamble"><i class="fa fa-check"></i><b>10.3</b> Ensamble</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#discutamos"><i class="fa fa-check"></i><b>10.3.1</b> Discutamos</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#mapeo"><i class="fa fa-check"></i><b>10.4</b> Mapeo</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#discutamos-1"><i class="fa fa-check"></i><b>10.4.1</b> Discutamos</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#binning"><i class="fa fa-check"></i><b>10.5</b> Binning</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#maxbin"><i class="fa fa-check"></i><b>10.5.1</b> MaxBin</a></li>
+<li class="chapter" data-level="10.5.2" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#metabat"><i class="fa fa-check"></i><b>10.5.2</b> MetaBat</a></li>
+<li class="chapter" data-level="10.5.3" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#concoct"><i class="fa fa-check"></i><b>10.5.3</b> CONCOCT</a></li>
+<li class="chapter" data-level="10.5.4" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#discutamos-2"><i class="fa fa-check"></i><b>10.5.4</b> Discutamos</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#refinamiento"><i class="fa fa-check"></i><b>10.6</b> Refinamiento</a>
+<ul>
+<li class="chapter" data-level="10.6.1" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#dastool"><i class="fa fa-check"></i><b>10.6.1</b> DASTool</a></li>
+<li class="chapter" data-level="10.6.2" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#checkm"><i class="fa fa-check"></i><b>10.6.2</b> CheckM</a></li>
+<li class="chapter" data-level="10.6.3" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#mis-bins"><i class="fa fa-check"></i><b>10.6.3</b> Mis Bins</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="asignación-taxonómica.html"><a href="asignación-taxonómica.html"><i class="fa fa-check"></i><b>11</b> Asignación taxonómica</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="asignación-taxonómica.html"><a href="asignación-taxonómica.html#leamos-los-datos"><i class="fa fa-check"></i><b>11.1</b> Leamos los datos</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="inferencia-metabólica.html"><a href="inferencia-metabólica.html"><i class="fa fa-check"></i><b>12</b> Inferencia metabólica</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="inferencia-metabólica.html"><a href="inferencia-metabólica.html#keeg"><i class="fa fa-check"></i><b>12.1</b> KEEG</a></li>
+<li class="chapter" data-level="12.2" data-path="inferencia-metabólica.html"><a href="inferencia-metabólica.html#explorando-el-metabolismo-con-rbims."><i class="fa fa-check"></i><b>12.2</b> Explorando el metabolismo con rbims.</a></li>
+<li class="chapter" data-level="12.3" data-path="inferencia-metabólica.html"><a href="inferencia-metabólica.html#anotación-con-interproscan"><i class="fa fa-check"></i><b>12.3</b> Anotación con InterproScan</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="inferencia-metabólica.html"><a href="inferencia-metabólica.html#finalmente-podemos-escribir-esto-en-una-tabla."><i class="fa fa-check"></i><b>12.3.1</b> Finalmente podemos escribir esto en una tabla.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="proyectos-colaborativos-1.html"><a href="proyectos-colaborativos-1.html"><i class="fa fa-check"></i><b>13</b> Proyectos colaborativos</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="proyectos-colaborativos-1.html"><a href="proyectos-colaborativos-1.html#propuesta-1"><i class="fa fa-check"></i><b>13.1</b> Propuesta 1</a></li>
+<li class="chapter" data-level="13.2" data-path="proyectos-colaborativos-1.html"><a href="proyectos-colaborativos-1.html#propuesta-2"><i class="fa fa-check"></i><b>13.2</b> Propuesta 2</a></li>
+<li class="chapter" data-level="13.3" data-path="proyectos-colaborativos-1.html"><a href="proyectos-colaborativos-1.html#propuesta-3"><i class="fa fa-check"></i><b>13.3</b> Propuesta 3</a></li>
+<li class="chapter" data-level="13.4" data-path="proyectos-colaborativos-1.html"><a href="proyectos-colaborativos-1.html#propuesta-4"><i class="fa fa-check"></i><b>13.4</b> Propuesta 4</a></li>
+<li class="chapter" data-level="13.5" data-path="proyectos-colaborativos-1.html"><a href="proyectos-colaborativos-1.html#propuesta-5"><i class="fa fa-check"></i><b>13.5</b> Propuesta 5</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Creación de paquetes de R/Bioconductor para el análisis de metagenomas.</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="documentación-de-funciones" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">5</span> Documentación de funciones<a href="documentación-de-funciones.html#documentación-de-funciones" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Instructor/a:</p>
+<p>05 de agosto de 2025</p>
+<div id="diapositivas-4" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Diapositivas<a href="documentación-de-funciones.html#diapositivas-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><a href="https://comunidadbioinfo.github.io/cdsb2023/Documentacion_slides_03_sesion5.html"><iframe src="https://comunidadbioinfo.github.io/cdsb2023/Documentacion_slides_03_sesion5.html" width="672" height="380px" data-external="1"></iframe></a></p>
+</div>
+<div id="links-importantes" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Links importantes:<a href="documentación-de-funciones.html#links-importantes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Esta lección está basada en algunos manuales sobre documentación:</p>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/roxygen2/vignettes/rd.html">Una viñeta del cranproject</a></li>
+<li><a href="https://r-pkgs.org/man.html#sec-man-key-md-features">El manual de paqutes de r</a></li>
+<li><a href="https://combine-australia.github.io/r-pkg-dev/documenting-functions.html">En esta viñeta de cranproject</a></li>
+</ul>
+</div>
+<div id="qué-es-la-documentación-de-una-función-y-por-qué-es-importante" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> ¿Qué es la documentación de una función y por qué es importante?<a href="documentación-de-funciones.html#qué-es-la-documentación-de-una-función-y-por-qué-es-importante" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li><p>🙇️ Es la información complementaria que el desarrollador escribe sobre una
+función y que se accede con <code>?</code> seguido el nombre de una función actual de un
+paquete p.ej. <code>?unafuncion</code>.</p></li>
+<li><p>📁 La documentación se almacena como un archivo .Rd (“R documentation) en la
+carpeta <code>man/</code>.</p></li>
+<li><p>🔎 La documentación usa una síntesis especial, que es distinta a la de r y
+que está ligeramente basada en LaTeX.</p></li>
+<li><p>📄 Se puede renderizar como html, pdf o texto sin formato según se necesite.</p></li>
+</ol>
+</div>
+<div id="generacion-de-la-documentacion-con-ayuda-del-paquete-roxygen" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Generacion de la documentacion con ayuda del paquete roxygen<a href="documentación-de-funciones.html#generacion-de-la-documentacion-con-ayuda-del-paquete-roxygen" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En un paquete de r y en cualquier ecosistema de devtools no editamos un
+documento <code>.Rd</code> manualmente. La documentación usa una síntesis parecida a LaTex
+que puede ser fácil de estropear. Por ventaja existen paquetes como roxigen2.
+Usar roxigen nos permite usar comentarios especiales sobre el inicio de la
+función, esto nos da un par de ventajas:</p>
+<ol style="list-style-type: decimal">
+<li>✅ La documentación y la función estarán en un mismo lugar, por lo que si
+editas la función será mas fácil recordar actualizar la documentcion también.</li>
+<li>🎉 Puedes usar markdown en lugar de la síntesis especial para los archivos
+<code>.Rd</code></li>
+</ol>
+</div>
+<div id="antes-de-empezar" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Antes de empezar…✏️<a href="documentación-de-funciones.html#antes-de-empezar" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Vamos a crear un función para nuestro paquete. Supongamos que para nuestro
+paquete necesitamos una función que calcule la moda. Esta es una forma sencilla
+de calcular la moda:</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="documentación-de-funciones.html#cb50-1" tabindex="-1"></a>getmode <span class="ot">&lt;-</span> <span class="cf">function</span>(serievector) {</span>
+<span id="cb50-2"><a href="documentación-de-funciones.html#cb50-2" tabindex="-1"></a>  uniqv <span class="ot">&lt;-</span> <span class="fu">unique</span>(serievector)</span>
+<span id="cb50-3"><a href="documentación-de-funciones.html#cb50-3" tabindex="-1"></a>  uniqv[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(serievector, uniqv)))]</span>
+<span id="cb50-4"><a href="documentación-de-funciones.html#cb50-4" tabindex="-1"></a>}</span></code></pre></div>
+<ul>
+<li><code>unique(serievector)</code>: Crea un vector que contiene únicamente los valores únicos
+de la serie de números serievector.</li>
+<li><code>match(serievector, uniqv)</code>: Encuentra la posición de cada valor de serievector
+en el vector único uniqv.</li>
+<li><code>tabulate(match(serievector, uniqv))</code>: Cuenta cuántas veces aparece cada valor en
+la serie serievector.</li>
+<li><code>which.max(tabulate(match(serievector, uniqv)))</code>: Encuentra el índice del valor
+máximo en el vector de frecuencias.</li>
+<li><code>uniqv[which.max(tabulate(match(serievector, uniqv)))]</code>: Devuelve el valor
+correspondiente al índice calculado, que es la moda.</li>
+</ul>
+<p>Creamos un ejemplo para ver que funcione:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="documentación-de-funciones.html#cb51-1" tabindex="-1"></a>serie_numeros <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>)</span>
+<span id="cb51-2"><a href="documentación-de-funciones.html#cb51-2" tabindex="-1"></a>resultado <span class="ot">&lt;-</span> <span class="fu">getmode</span>(serie_numeros)</span>
+<span id="cb51-3"><a href="documentación-de-funciones.html#cb51-3" tabindex="-1"></a><span class="fu">print</span>(resultado)</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p>Bien ahora si podemos podemos empezar a usar el paquete de roxygen para documentar nuestra función.. comencemos.</p>
+</div>
+<div id="generacion-de-un-bloque-de-documentacion-con-ayuda-del-paquete-roxygen." class="section level2 hasAnchor" number="5.6">
+<h2><span class="header-section-number">5.6</span> Generacion de un bloque de documentacion con ayuda del paquete roxygen.<a href="documentación-de-funciones.html#generacion-de-un-bloque-de-documentacion-con-ayuda-del-paquete-roxygen." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Podemos insertar un esqueleto de comentarios de roxygen para ver su síntesis. Colocamos el cursor en algún lugar de la definición de nuestra función y buscamos en la pestaña Código &gt; Insertar Roxygen Skeleton.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="documentación-de-funciones.html#cb53-1" tabindex="-1"></a><span class="co">#&#39; Title</span></span>
+<span id="cb53-2"><a href="documentación-de-funciones.html#cb53-2" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb53-3"><a href="documentación-de-funciones.html#cb53-3" tabindex="-1"></a><span class="co">#&#39; @param serievector </span></span>
+<span id="cb53-4"><a href="documentación-de-funciones.html#cb53-4" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb53-5"><a href="documentación-de-funciones.html#cb53-5" tabindex="-1"></a><span class="co">#&#39; @return</span></span>
+<span id="cb53-6"><a href="documentación-de-funciones.html#cb53-6" tabindex="-1"></a><span class="co">#&#39; @export</span></span>
+<span id="cb53-7"><a href="documentación-de-funciones.html#cb53-7" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb53-8"><a href="documentación-de-funciones.html#cb53-8" tabindex="-1"></a><span class="co">#&#39; @examples</span></span>
+<span id="cb53-9"><a href="documentación-de-funciones.html#cb53-9" tabindex="-1"></a></span>
+<span id="cb53-10"><a href="documentación-de-funciones.html#cb53-10" tabindex="-1"></a>getmode <span class="ot">&lt;-</span> <span class="cf">function</span>(serievector) {</span>
+<span id="cb53-11"><a href="documentación-de-funciones.html#cb53-11" tabindex="-1"></a>  uniqv <span class="ot">&lt;-</span> <span class="fu">unique</span>(serievector)</span>
+<span id="cb53-12"><a href="documentación-de-funciones.html#cb53-12" tabindex="-1"></a>  uniqv[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(serievector, uniqv)))]</span>
+<span id="cb53-13"><a href="documentación-de-funciones.html#cb53-13" tabindex="-1"></a>}</span></code></pre></div>
+<p>Ahora ya tenemos un esqueleto de la documentación que nos da una ventaja para su creación.
+Las líneas de comentarios de Roxygen siempre comienzan con <code>#'</code>, el habitual para un comentario <code>#</code> mas un <code>'</code></p>
+<p>Veamos los comentarios de uno por uno:</p>
+<p>Empezamos con el titulo. Se sugiere poner en el titulo las acciones principales que realiza la función en este caso por ejemplo podremos usar:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="documentación-de-funciones.html#cb54-1" tabindex="-1"></a><span class="co">#&#39; @title Encontrar la Moda de una Serie de Números</span></span>
+<span id="cb54-2"><a href="documentación-de-funciones.html#cb54-2" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb54-3"><a href="documentación-de-funciones.html#cb54-3" tabindex="-1"></a><span class="co">#&#39; @param serievector </span></span>
+<span id="cb54-4"><a href="documentación-de-funciones.html#cb54-4" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb54-5"><a href="documentación-de-funciones.html#cb54-5" tabindex="-1"></a><span class="co">#&#39; @return</span></span>
+<span id="cb54-6"><a href="documentación-de-funciones.html#cb54-6" tabindex="-1"></a><span class="co">#&#39; @export</span></span>
+<span id="cb54-7"><a href="documentación-de-funciones.html#cb54-7" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb54-8"><a href="documentación-de-funciones.html#cb54-8" tabindex="-1"></a><span class="co">#&#39; @examples</span></span>
+<span id="cb54-9"><a href="documentación-de-funciones.html#cb54-9" tabindex="-1"></a></span>
+<span id="cb54-10"><a href="documentación-de-funciones.html#cb54-10" tabindex="-1"></a>getmode <span class="ot">&lt;-</span> <span class="cf">function</span>(serievector) {</span>
+<span id="cb54-11"><a href="documentación-de-funciones.html#cb54-11" tabindex="-1"></a>  uniqv <span class="ot">&lt;-</span> <span class="fu">unique</span>(serievector)</span>
+<span id="cb54-12"><a href="documentación-de-funciones.html#cb54-12" tabindex="-1"></a>  uniqv[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(serievector, uniqv)))]</span>
+<span id="cb54-13"><a href="documentación-de-funciones.html#cb54-13" tabindex="-1"></a>}</span></code></pre></div>
+<p>Muy bien!.
+El siguiente comentario que podemos ver es <code>@param</code>. Pero antes, vamos a añadir una pequeña descripción de la función y como usarla. Primero añadimos la pequeña descripción con <code>@description</code>:</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="documentación-de-funciones.html#cb55-1" tabindex="-1"></a><span class="co">#&#39; @title Encontrar la Moda de una Serie de Números</span></span>
+<span id="cb55-2"><a href="documentación-de-funciones.html#cb55-2" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb55-3"><a href="documentación-de-funciones.html#cb55-3" tabindex="-1"></a><span class="co">#&#39; @description Esta función lee una serie de números en forma de vector y</span></span>
+<span id="cb55-4"><a href="documentación-de-funciones.html#cb55-4" tabindex="-1"></a><span class="co">#&#39; encuentra el elemento que mas se repite, es decir la moda.</span></span>
+<span id="cb55-5"><a href="documentación-de-funciones.html#cb55-5" tabindex="-1"></a><span class="co">#&#39; @param serievector</span></span>
+<span id="cb55-6"><a href="documentación-de-funciones.html#cb55-6" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb55-7"><a href="documentación-de-funciones.html#cb55-7" tabindex="-1"></a><span class="co">#&#39; @return</span></span>
+<span id="cb55-8"><a href="documentación-de-funciones.html#cb55-8" tabindex="-1"></a><span class="co">#&#39; @export</span></span>
+<span id="cb55-9"><a href="documentación-de-funciones.html#cb55-9" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb55-10"><a href="documentación-de-funciones.html#cb55-10" tabindex="-1"></a><span class="co">#&#39; @examples</span></span>
+<span id="cb55-11"><a href="documentación-de-funciones.html#cb55-11" tabindex="-1"></a></span>
+<span id="cb55-12"><a href="documentación-de-funciones.html#cb55-12" tabindex="-1"></a>getmode <span class="ot">&lt;-</span> <span class="cf">function</span>(serievector) {</span>
+<span id="cb55-13"><a href="documentación-de-funciones.html#cb55-13" tabindex="-1"></a>  uniqv <span class="ot">&lt;-</span> <span class="fu">unique</span>(serievector)</span>
+<span id="cb55-14"><a href="documentación-de-funciones.html#cb55-14" tabindex="-1"></a>  uniqv[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(serievector, uniqv)))]</span>
+<span id="cb55-15"><a href="documentación-de-funciones.html#cb55-15" tabindex="-1"></a>}</span></code></pre></div>
+<p>Ahora vamos a añadir el comentario <code>@usage</code> que nos indica como puedes mandar a llamar la función.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="documentación-de-funciones.html#cb56-1" tabindex="-1"></a><span class="co">#&#39; @title Encontrar la Moda de una Serie de Números</span></span>
+<span id="cb56-2"><a href="documentación-de-funciones.html#cb56-2" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb56-3"><a href="documentación-de-funciones.html#cb56-3" tabindex="-1"></a><span class="co">#&#39; @description Esta función lee una serie de números en forma de vector y</span></span>
+<span id="cb56-4"><a href="documentación-de-funciones.html#cb56-4" tabindex="-1"></a><span class="co">#&#39; encuentra el elemento que mas se repite, es decir la moda.</span></span>
+<span id="cb56-5"><a href="documentación-de-funciones.html#cb56-5" tabindex="-1"></a><span class="co">#&#39; @usage getmode(serievector)</span></span>
+<span id="cb56-6"><a href="documentación-de-funciones.html#cb56-6" tabindex="-1"></a><span class="co">#&#39; @param serievector</span></span>
+<span id="cb56-7"><a href="documentación-de-funciones.html#cb56-7" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb56-8"><a href="documentación-de-funciones.html#cb56-8" tabindex="-1"></a><span class="co">#&#39; @return</span></span>
+<span id="cb56-9"><a href="documentación-de-funciones.html#cb56-9" tabindex="-1"></a><span class="co">#&#39; @export</span></span>
+<span id="cb56-10"><a href="documentación-de-funciones.html#cb56-10" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb56-11"><a href="documentación-de-funciones.html#cb56-11" tabindex="-1"></a><span class="co">#&#39; @examples</span></span>
+<span id="cb56-12"><a href="documentación-de-funciones.html#cb56-12" tabindex="-1"></a></span>
+<span id="cb56-13"><a href="documentación-de-funciones.html#cb56-13" tabindex="-1"></a>getmode <span class="ot">&lt;-</span> <span class="cf">function</span>(serievector) {</span>
+<span id="cb56-14"><a href="documentación-de-funciones.html#cb56-14" tabindex="-1"></a>  uniqv <span class="ot">&lt;-</span> <span class="fu">unique</span>(serievector)</span>
+<span id="cb56-15"><a href="documentación-de-funciones.html#cb56-15" tabindex="-1"></a>  uniqv[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(serievector, uniqv)))]</span>
+<span id="cb56-16"><a href="documentación-de-funciones.html#cb56-16" tabindex="-1"></a>}</span></code></pre></div>
+<p>Ahora si vamos a añadir una pequeña descripción de nuestros argumentos. Si tuviéramos mas de un parámetro en nuestra función podríamos llamar las veces que sea necesario el comentario de parámetro con <code>@param</code>, veamoslo.</p>
+<p>Ahora añadimos una pequeña descripción a nuestro único parámetro que es serievector:</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="documentación-de-funciones.html#cb57-1" tabindex="-1"></a><span class="co">#&#39; @title Encontrar la Moda de una Serie de Números</span></span>
+<span id="cb57-2"><a href="documentación-de-funciones.html#cb57-2" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb57-3"><a href="documentación-de-funciones.html#cb57-3" tabindex="-1"></a><span class="co">#&#39; @description Esta función lee una serie de números en forma de vector y</span></span>
+<span id="cb57-4"><a href="documentación-de-funciones.html#cb57-4" tabindex="-1"></a><span class="co">#&#39; encuentra el elemento que mas se repite, es decir la moda.</span></span>
+<span id="cb57-5"><a href="documentación-de-funciones.html#cb57-5" tabindex="-1"></a><span class="co">#&#39; </span></span>
+<span id="cb57-6"><a href="documentación-de-funciones.html#cb57-6" tabindex="-1"></a><span class="co">#&#39; @param serievector Es una serie de números en forma de  un vector simple de r.</span></span>
+<span id="cb57-7"><a href="documentación-de-funciones.html#cb57-7" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb57-8"><a href="documentación-de-funciones.html#cb57-8" tabindex="-1"></a><span class="co">#&#39; @return</span></span>
+<span id="cb57-9"><a href="documentación-de-funciones.html#cb57-9" tabindex="-1"></a><span class="co">#&#39; @export</span></span>
+<span id="cb57-10"><a href="documentación-de-funciones.html#cb57-10" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb57-11"><a href="documentación-de-funciones.html#cb57-11" tabindex="-1"></a><span class="co">#&#39; @examples</span></span>
+<span id="cb57-12"><a href="documentación-de-funciones.html#cb57-12" tabindex="-1"></a></span>
+<span id="cb57-13"><a href="documentación-de-funciones.html#cb57-13" tabindex="-1"></a>getmode <span class="ot">&lt;-</span> <span class="cf">function</span>(serievector) {</span>
+<span id="cb57-14"><a href="documentación-de-funciones.html#cb57-14" tabindex="-1"></a>  uniqv <span class="ot">&lt;-</span> <span class="fu">unique</span>(serievector)</span>
+<span id="cb57-15"><a href="documentación-de-funciones.html#cb57-15" tabindex="-1"></a>  uniqv[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(serievector, uniqv)))]</span>
+<span id="cb57-16"><a href="documentación-de-funciones.html#cb57-16" tabindex="-1"></a>}</span></code></pre></div>
+<p>Después, podemos añadir un comentario de detalles de la función con <code>@details</code>.
+Por ejemplo, si en nuestro ejemplo tuviéramos ciertos valores no numéricos en nuestro vector de entrada, por ejemplo letras, ¿nuestra función podría leerlas?, o si le diéramos un vector sin caracteres ¿que pasaría?, veamos:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="documentación-de-funciones.html#cb58-1" tabindex="-1"></a>serie_numeros <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="st">&quot;d&quot;</span>, <span class="st">&quot;d&quot;</span>,<span class="st">&quot;d&quot;</span>)</span>
+<span id="cb58-2"><a href="documentación-de-funciones.html#cb58-2" tabindex="-1"></a>resultado <span class="ot">&lt;-</span> <span class="fu">getmode</span>(serie_numeros)</span>
+<span id="cb58-3"><a href="documentación-de-funciones.html#cb58-3" tabindex="-1"></a><span class="fu">print</span>(resultado)</span></code></pre></div>
+<pre><code>## [1] &quot;d&quot;</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="documentación-de-funciones.html#cb60-1" tabindex="-1"></a>serie_numeros <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb60-2"><a href="documentación-de-funciones.html#cb60-2" tabindex="-1"></a>resultado <span class="ot">&lt;-</span> <span class="fu">getmode</span>(serie_numeros)</span>
+<span id="cb60-3"><a href="documentación-de-funciones.html#cb60-3" tabindex="-1"></a><span class="fu">print</span>(resultado)</span></code></pre></div>
+<pre><code>## NULL</code></pre>
+<p>Entonces, esto es un ejemplo de lo que podríamos poner en el comentario
+<code>@details</code>. Hagamoslo describiendo esto. En details podemos agregar detalles
+un poco mas específicos que en la descripción de la función</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="documentación-de-funciones.html#cb62-1" tabindex="-1"></a><span class="co">#&#39; @title Encontrar la Moda de una Serie de Números</span></span>
+<span id="cb62-2"><a href="documentación-de-funciones.html#cb62-2" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb62-3"><a href="documentación-de-funciones.html#cb62-3" tabindex="-1"></a><span class="co">#&#39; @description Esta función lee una serie de números en forma de vector y</span></span>
+<span id="cb62-4"><a href="documentación-de-funciones.html#cb62-4" tabindex="-1"></a><span class="co">#&#39; encuentra el elemento que mas se repite, es decir la moda.</span></span>
+<span id="cb62-5"><a href="documentación-de-funciones.html#cb62-5" tabindex="-1"></a><span class="co">#&#39; </span></span>
+<span id="cb62-6"><a href="documentación-de-funciones.html#cb62-6" tabindex="-1"></a><span class="co">#&#39; @param serievector Es una serie de números en forma de  un vector simple de r.</span></span>
+<span id="cb62-7"><a href="documentación-de-funciones.html#cb62-7" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb62-8"><a href="documentación-de-funciones.html#cb62-8" tabindex="-1"></a><span class="co">#&#39; @details si tu vector de entrada puede ser interpretado alternando números y </span></span>
+<span id="cb62-9"><a href="documentación-de-funciones.html#cb62-9" tabindex="-1"></a><span class="co">#&#39; letras escritas entre comillas &quot;&quot;. Si un vector esta vacío, dará como </span></span>
+<span id="cb62-10"><a href="documentación-de-funciones.html#cb62-10" tabindex="-1"></a><span class="co">#&#39; resultado un NULL.</span></span>
+<span id="cb62-11"><a href="documentación-de-funciones.html#cb62-11" tabindex="-1"></a><span class="co">#&#39; @return</span></span>
+<span id="cb62-12"><a href="documentación-de-funciones.html#cb62-12" tabindex="-1"></a><span class="co">#&#39; @export</span></span>
+<span id="cb62-13"><a href="documentación-de-funciones.html#cb62-13" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb62-14"><a href="documentación-de-funciones.html#cb62-14" tabindex="-1"></a><span class="co">#&#39; @examples</span></span>
+<span id="cb62-15"><a href="documentación-de-funciones.html#cb62-15" tabindex="-1"></a></span>
+<span id="cb62-16"><a href="documentación-de-funciones.html#cb62-16" tabindex="-1"></a>getmode <span class="ot">&lt;-</span> <span class="cf">function</span>(serievector) {</span>
+<span id="cb62-17"><a href="documentación-de-funciones.html#cb62-17" tabindex="-1"></a>  uniqv <span class="ot">&lt;-</span> <span class="fu">unique</span>(serievector)</span>
+<span id="cb62-18"><a href="documentación-de-funciones.html#cb62-18" tabindex="-1"></a>  uniqv[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(serievector, uniqv)))]</span>
+<span id="cb62-19"><a href="documentación-de-funciones.html#cb62-19" tabindex="-1"></a>}</span></code></pre></div>
+<p>Ya casi terminamos de llenar nuestra documentación, pero antes vamos a ver algunos
+otros arrobas que pudieran ser importantes.
+El <code>@import</code> e <code>@importfrom</code> importan funciones de otros paquetes en caso
+de que las necesitemos, el primero importa todas las funciones del paquete que
+que solicites, y el segundo importa solo algunas funciones especificas.
+En nuestra función no necesitamos llamar funciones de otros paquetes puesto que
+todas las que usamos están en r base. Pero imaginemos que tu función, por
+ejemplo necesita leer un archivo <code>.tsv</code> con la función read_tsv del paquete
+readr y después reconvertir la tabla resultante en un archivo con <code>write.table</code>
+pero solo necesitas esa función del paquete <code>utils</code>, entonces haríamos:</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="documentación-de-funciones.html#cb63-1" tabindex="-1"></a><span class="co">#&#39; @title Encontrar la Moda de una Serie de Números</span></span>
+<span id="cb63-2"><a href="documentación-de-funciones.html#cb63-2" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb63-3"><a href="documentación-de-funciones.html#cb63-3" tabindex="-1"></a><span class="co">#&#39; @description Esta función lee una serie de números en forma de vector y</span></span>
+<span id="cb63-4"><a href="documentación-de-funciones.html#cb63-4" tabindex="-1"></a><span class="co">#&#39; encuentra el elemento que mas se repite, es decir la moda.</span></span>
+<span id="cb63-5"><a href="documentación-de-funciones.html#cb63-5" tabindex="-1"></a><span class="co">#&#39; </span></span>
+<span id="cb63-6"><a href="documentación-de-funciones.html#cb63-6" tabindex="-1"></a><span class="co">#&#39; @param serievector Es una serie de números en forma de  un vector simple de r.</span></span>
+<span id="cb63-7"><a href="documentación-de-funciones.html#cb63-7" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb63-8"><a href="documentación-de-funciones.html#cb63-8" tabindex="-1"></a><span class="co">#&#39; @details si tu vector de entrada puede ser interpretado alternando números y </span></span>
+<span id="cb63-9"><a href="documentación-de-funciones.html#cb63-9" tabindex="-1"></a><span class="co">#&#39; letras escritas entre comillas &quot;&quot;. Si un vector esta vacío, dará como </span></span>
+<span id="cb63-10"><a href="documentación-de-funciones.html#cb63-10" tabindex="-1"></a><span class="co">#&#39; resultado un NULL.</span></span>
+<span id="cb63-11"><a href="documentación-de-funciones.html#cb63-11" tabindex="-1"></a><span class="co">#&#39; @import readr</span></span>
+<span id="cb63-12"><a href="documentación-de-funciones.html#cb63-12" tabindex="-1"></a><span class="co">#&#39; @importFrom utils write.table</span></span>
+<span id="cb63-13"><a href="documentación-de-funciones.html#cb63-13" tabindex="-1"></a><span class="co">#&#39; @return</span></span>
+<span id="cb63-14"><a href="documentación-de-funciones.html#cb63-14" tabindex="-1"></a><span class="co">#&#39; @export</span></span>
+<span id="cb63-15"><a href="documentación-de-funciones.html#cb63-15" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb63-16"><a href="documentación-de-funciones.html#cb63-16" tabindex="-1"></a><span class="co">#&#39; @examples</span></span>
+<span id="cb63-17"><a href="documentación-de-funciones.html#cb63-17" tabindex="-1"></a></span>
+<span id="cb63-18"><a href="documentación-de-funciones.html#cb63-18" tabindex="-1"></a>getmode <span class="ot">&lt;-</span> <span class="cf">function</span>(serievector) {</span>
+<span id="cb63-19"><a href="documentación-de-funciones.html#cb63-19" tabindex="-1"></a>  uniqv <span class="ot">&lt;-</span> <span class="fu">unique</span>(serievector)</span>
+<span id="cb63-20"><a href="documentación-de-funciones.html#cb63-20" tabindex="-1"></a>  uniqv[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(serievector, uniqv)))]</span>
+<span id="cb63-21"><a href="documentación-de-funciones.html#cb63-21" tabindex="-1"></a>}</span></code></pre></div>
+<p>Así podemos importar las funciones que necesitemos de otros paquetes y se
+incluirán en la documentación y se cargaran automáticamente al cargar tu paquete.</p>
+<p>:eyes::exclamation: Para un correcto funcionamiento de tu paquete y al estar los
+paquetes necesarios incluidos en la documentación, no será necesario llamarlos
+de la forma ``library(“apackage”)```.</p>
+<p>Entonces llegamos a la sección <code>@return</code>. Esta descripción le servirá al
+usuario del paquete para conocer cual sera el resultado de la función, que puede
+ser un archivo, una tabla, un numero,etc. Entonces retomando la función que
+usamos al inicio, vamos a escribir una descripción corta del resultado de la
+función <code>getmode()</code>.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="documentación-de-funciones.html#cb64-1" tabindex="-1"></a><span class="co">#&#39; @title Encontrar la Moda de una Serie de Números</span></span>
+<span id="cb64-2"><a href="documentación-de-funciones.html#cb64-2" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb64-3"><a href="documentación-de-funciones.html#cb64-3" tabindex="-1"></a><span class="co">#&#39; @description Esta función lee una serie de números en forma de vector y</span></span>
+<span id="cb64-4"><a href="documentación-de-funciones.html#cb64-4" tabindex="-1"></a><span class="co">#&#39; encuentra el elemento que mas se repite, es decir la moda.</span></span>
+<span id="cb64-5"><a href="documentación-de-funciones.html#cb64-5" tabindex="-1"></a><span class="co">#&#39; </span></span>
+<span id="cb64-6"><a href="documentación-de-funciones.html#cb64-6" tabindex="-1"></a><span class="co">#&#39; @param serievector Es una serie de números en forma de  un vector simple de r.</span></span>
+<span id="cb64-7"><a href="documentación-de-funciones.html#cb64-7" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb64-8"><a href="documentación-de-funciones.html#cb64-8" tabindex="-1"></a><span class="co">#&#39; @details si tu vector de entrada puede ser interpretado alternando números y </span></span>
+<span id="cb64-9"><a href="documentación-de-funciones.html#cb64-9" tabindex="-1"></a><span class="co">#&#39; letras escritas entre comillas &quot;&quot;. Si un vector esta vacío, dará como </span></span>
+<span id="cb64-10"><a href="documentación-de-funciones.html#cb64-10" tabindex="-1"></a><span class="co">#&#39; resultado un NULL.</span></span>
+<span id="cb64-11"><a href="documentación-de-funciones.html#cb64-11" tabindex="-1"></a><span class="co">#&#39; @return El carácter con mas frecuencia de el vector de entrada.</span></span>
+<span id="cb64-12"><a href="documentación-de-funciones.html#cb64-12" tabindex="-1"></a><span class="co">#&#39; @export</span></span>
+<span id="cb64-13"><a href="documentación-de-funciones.html#cb64-13" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb64-14"><a href="documentación-de-funciones.html#cb64-14" tabindex="-1"></a><span class="co">#&#39; @examples</span></span>
+<span id="cb64-15"><a href="documentación-de-funciones.html#cb64-15" tabindex="-1"></a></span>
+<span id="cb64-16"><a href="documentación-de-funciones.html#cb64-16" tabindex="-1"></a>getmode <span class="ot">&lt;-</span> <span class="cf">function</span>(serievector) {</span>
+<span id="cb64-17"><a href="documentación-de-funciones.html#cb64-17" tabindex="-1"></a>  uniqv <span class="ot">&lt;-</span> <span class="fu">unique</span>(serievector)</span>
+<span id="cb64-18"><a href="documentación-de-funciones.html#cb64-18" tabindex="-1"></a>  uniqv[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(serievector, uniqv)))]</span>
+<span id="cb64-19"><a href="documentación-de-funciones.html#cb64-19" tabindex="-1"></a>}</span></code></pre></div>
+<p>Por ultimo tenemos <code>@export</code> que es el encargado de renderizar la documentación
+para que pueda aparecer en la ventana de Ayuda (abajo a la derecha). esta opción la dejamos para funciones principales que el usuario va a utilizar, aunque puede que existan alguna funciones internas que no queremos que el usuario vea. En ese caso vamos a usar
+<code>@noRd</code> en lugar de este.</p>
+<p>Antes de terminar podemos incluir ejemplos de como funciona nuestra función para
+un mejor entendimiento, pongamos los que ya realizamos:</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="documentación-de-funciones.html#cb65-1" tabindex="-1"></a><span class="co">#&#39; @title Encontrar la Moda de una Serie de Números</span></span>
+<span id="cb65-2"><a href="documentación-de-funciones.html#cb65-2" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb65-3"><a href="documentación-de-funciones.html#cb65-3" tabindex="-1"></a><span class="co">#&#39; @description Esta función lee una serie de números en forma de vector y</span></span>
+<span id="cb65-4"><a href="documentación-de-funciones.html#cb65-4" tabindex="-1"></a><span class="co">#&#39; encuentra el elemento que mas se repite, es decir la moda.</span></span>
+<span id="cb65-5"><a href="documentación-de-funciones.html#cb65-5" tabindex="-1"></a><span class="co">#&#39; </span></span>
+<span id="cb65-6"><a href="documentación-de-funciones.html#cb65-6" tabindex="-1"></a><span class="co">#&#39; @param serievector Es una serie de números en forma de  un vector simple de r.</span></span>
+<span id="cb65-7"><a href="documentación-de-funciones.html#cb65-7" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb65-8"><a href="documentación-de-funciones.html#cb65-8" tabindex="-1"></a><span class="co">#&#39; @details si tu vector de entrada puede ser interpretado alternando números y </span></span>
+<span id="cb65-9"><a href="documentación-de-funciones.html#cb65-9" tabindex="-1"></a><span class="co">#&#39; letras escritas entre comillas &quot;&quot;. Si un vector esta vacío, dará como </span></span>
+<span id="cb65-10"><a href="documentación-de-funciones.html#cb65-10" tabindex="-1"></a><span class="co">#&#39; resultado un NULL.</span></span>
+<span id="cb65-11"><a href="documentación-de-funciones.html#cb65-11" tabindex="-1"></a><span class="co">#&#39; @return El carácter con mas frecuencia de el vector de entrada.</span></span>
+<span id="cb65-12"><a href="documentación-de-funciones.html#cb65-12" tabindex="-1"></a><span class="co">#&#39; @export</span></span>
+<span id="cb65-13"><a href="documentación-de-funciones.html#cb65-13" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb65-14"><a href="documentación-de-funciones.html#cb65-14" tabindex="-1"></a><span class="co">#&#39; @examples</span></span>
+<span id="cb65-15"><a href="documentación-de-funciones.html#cb65-15" tabindex="-1"></a><span class="co">#&#39; serie_números &lt;- c(1, 2, 2, 2, 2, 3, 3, 4, 4, 4)</span></span>
+<span id="cb65-16"><a href="documentación-de-funciones.html#cb65-16" tabindex="-1"></a><span class="co">#&#39; resultado &lt;- getmode(serie_números)</span></span>
+<span id="cb65-17"><a href="documentación-de-funciones.html#cb65-17" tabindex="-1"></a><span class="co">#&#39; print(resultado)</span></span>
+<span id="cb65-18"><a href="documentación-de-funciones.html#cb65-18" tabindex="-1"></a></span>
+<span id="cb65-19"><a href="documentación-de-funciones.html#cb65-19" tabindex="-1"></a>getmode <span class="ot">&lt;-</span> <span class="cf">function</span>(serievector) {</span>
+<span id="cb65-20"><a href="documentación-de-funciones.html#cb65-20" tabindex="-1"></a>  uniqv <span class="ot">&lt;-</span> <span class="fu">unique</span>(serievector)</span>
+<span id="cb65-21"><a href="documentación-de-funciones.html#cb65-21" tabindex="-1"></a>  uniqv[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(serievector, uniqv)))]</span>
+<span id="cb65-22"><a href="documentación-de-funciones.html#cb65-22" tabindex="-1"></a>}</span></code></pre></div>
+<p>Ahora si, una vez teniendo listo el bloque de comentarios para la documentación, vamos a ejecutar <code>devtools::load_all()</code> para cargar nuestras funciones y hecho esto, ejecutamos
+<code>devtools::document()</code> o presionamos Ctrl/Cmd + Shift + D para convertir los comentarios en archivo <code>.Rd</code> y poder renderizarlo.</p>
+<p>💯 Listo, tenemos nuestra documentación para una función. Así se verá cuando el paquete esté terminado.</p>
+</div>
+<div id="otros-campos-de-la-documentacion." class="section level2 hasAnchor" number="5.7">
+<h2><span class="header-section-number">5.7</span> Otros campos de la documentacion.<a href="documentación-de-funciones.html#otros-campos-de-la-documentacion." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p><code>@seealso</code> para indicar funciones relacionadas y facilitar la búsqueda de funciones.</p></li>
+<li><p><code>@references</code> añade algunas referencias.</p></li>
+<li><p><code>@author</code> para especificar el autor de la función.</p></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="creando-mis-primeras-funciones.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="diseño-de-pruebas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

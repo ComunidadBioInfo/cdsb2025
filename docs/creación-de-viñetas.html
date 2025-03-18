@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>7 Creación de viñetas | Creación de paquetes de R/Bioconductor para el análisis de metagenomas.</title>
+  <meta name="description" content="7 Creación de viñetas | Creación de paquetes de R/Bioconductor para el análisis de metagenomas." />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="7 Creación de viñetas | Creación de paquetes de R/Bioconductor para el análisis de metagenomas." />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="comunidadbioinfo/cdsb2025" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7 Creación de viñetas | Creación de paquetes de R/Bioconductor para el análisis de metagenomas." />
+  
+  
+  
+
+<meta name="author" content="Dra. Mirna Vázquez Rosas-Landa, Dra. Joselyn Cristina Chávez Fuentes, M.C. Erick Cuevas Fernández" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="diseño-de-pruebas.html"/>
+<link rel="next" href="introducción-a-conda..html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Bienvenida</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#instructores"><i class="fa fa-check"></i><b>0.1</b> Instructores</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#ayudantes"><i class="fa fa-check"></i><b>0.2</b> Ayudantes</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#temario"><i class="fa fa-check"></i><b>0.3</b> Temario</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#patrocinadores"><i class="fa fa-check"></i><b>0.4</b> Patrocinadores</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#licencia"><i class="fa fa-check"></i><b>0.5</b> Licencia</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="keynote.html"><a href="keynote.html"><i class="fa fa-check"></i><b>1</b> Keynote</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="keynote.html"><a href="keynote.html#diapositivas"><i class="fa fa-check"></i><b>1.1</b> Diapositivas</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html"><i class="fa fa-check"></i><b>2</b> Control de versiones con GitHub y RStudio</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#diapositivas-1"><i class="fa fa-check"></i><b>2.1</b> Diapositivas</a></li>
+<li class="chapter" data-level="2.2" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#por-qué-hacer-control-de-versiones-de-nuestros-proyectos"><i class="fa fa-check"></i><b>2.2</b> ¿Por qué hacer control de versiones de nuestros proyectos?</a></li>
+<li class="chapter" data-level="2.3" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#git"><i class="fa fa-check"></i><b>2.3</b> Git</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#git-vs-controles-de-versión-a-mano"><i class="fa fa-check"></i><b>2.3.1</b> <strong>Git vs controles de versión a mano</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#recomendaciones-para-sus-proyectos"><i class="fa fa-check"></i><b>2.4</b> Recomendaciones para sus proyectos</a></li>
+<li class="chapter" data-level="2.5" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#proyectos-colaborativos"><i class="fa fa-check"></i><b>2.5</b> Proyectos colaborativos</a></li>
+<li class="chapter" data-level="2.6" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#github"><i class="fa fa-check"></i><b>2.6</b> GitHub</a></li>
+<li class="chapter" data-level="2.7" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#manual-de-sobreviviencia-con-git-y-github-en-rstudio-en-caso-de-ser-necesario"><i class="fa fa-check"></i><b>2.7</b> Manual de sobreviviencia con Git Y GitHub en RStudio (en caso de ser necesario)</a></li>
+<li class="chapter" data-level="2.8" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#cómo-clonar-un-repositorio-y-tener-conecciónpermisos-para-modificarlo"><i class="fa fa-check"></i><b>2.8</b> Cómo clonar un repositorio y tener conección/permisos para modificarlo?</a></li>
+<li class="chapter" data-level="2.9" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#credenciales-https-en-cache"><i class="fa fa-check"></i><b>2.9</b> Credenciales HTTPS en <strong>Cache</strong></a>
+<ul>
+<li class="chapter" data-level="2.9.1" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#actividad"><i class="fa fa-check"></i><b>2.9.1</b> Actividad</a></li>
+</ul></li>
+<li class="chapter" data-level="2.10" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#conectando-rstudio-con-git-y-github."><i class="fa fa-check"></i><b>2.10</b> Conectando RStudio con Git y Github.</a></li>
+<li class="chapter" data-level="2.11" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#github-primero-rstudio-después"><i class="fa fa-check"></i><b>2.11</b> GitHub primero, RStudio después…</a>
+<ul>
+<li class="chapter" data-level="2.11.1" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#actividad-1"><i class="fa fa-check"></i><b>2.11.1</b> Actividad</a></li>
+<li class="chapter" data-level="2.11.2" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#comentar-pull-y-push"><i class="fa fa-check"></i><b>2.11.2</b> Comentar, pull y push</a></li>
+</ul></li>
+<li class="chapter" data-level="2.12" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#rmarkdown-en-github"><i class="fa fa-check"></i><b>2.12</b> Rmarkdown en GitHub</a>
+<ul>
+<li class="chapter" data-level="2.12.1" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#actividad-2"><i class="fa fa-check"></i><b>2.12.1</b> Actividad</a></li>
+</ul></li>
+<li class="chapter" data-level="2.13" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#rstudio-primero-y-github-también"><i class="fa fa-check"></i><b>2.13</b> RStudio primero y GitHub también</a></li>
+<li class="chapter" data-level="2.14" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#proyecto-existente-github-al-final"><i class="fa fa-check"></i><b>2.14</b> Proyecto existente, GitHub al final</a>
+<ul>
+<li class="chapter" data-level="2.14.1" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#breviario-cultural-con-los-pats"><i class="fa fa-check"></i><b>2.14.1</b> Breviario cultural con los PATs</a></li>
+</ul></li>
+<li class="chapter" data-level="2.15" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#git-basics-commands"><i class="fa fa-check"></i><b>2.15</b> Git basics: commands</a></li>
+<li class="chapter" data-level="2.16" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#merge-conflics"><i class="fa fa-check"></i><b>2.16</b> Merge conflics</a></li>
+<li class="chapter" data-level="2.17" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#merge-conflics-1"><i class="fa fa-check"></i><b>2.17</b> Merge conflics</a></li>
+<li class="chapter" data-level="2.18" data-path="control-de-versiones-con-github-y-rstudio.html"><a href="control-de-versiones-con-github-y-rstudio.html#en-resumen"><i class="fa fa-check"></i><b>2.18</b> En resumen</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="creando-la-infraestructura-de-un-paquete.html"><a href="creando-la-infraestructura-de-un-paquete.html"><i class="fa fa-check"></i><b>3</b> Creando la infraestructura de un paquete</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="creando-la-infraestructura-de-un-paquete.html"><a href="creando-la-infraestructura-de-un-paquete.html#diapositivas-2"><i class="fa fa-check"></i><b>3.1</b> Diapositivas</a></li>
+<li class="chapter" data-level="3.2" data-path="creando-la-infraestructura-de-un-paquete.html"><a href="creando-la-infraestructura-de-un-paquete.html#los-primeros-pasos"><i class="fa fa-check"></i><b>3.2</b> Los primeros pasos</a></li>
+<li class="chapter" data-level="3.3" data-path="creando-la-infraestructura-de-un-paquete.html"><a href="creando-la-infraestructura-de-un-paquete.html#checks"><i class="fa fa-check"></i><b>3.3</b> Checks</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="creando-la-infraestructura-de-un-paquete.html"><a href="creando-la-infraestructura-de-un-paquete.html#bioccheck"><i class="fa fa-check"></i><b>3.3.1</b> BiocCheck</a></li>
+<li class="chapter" data-level="3.3.2" data-path="creando-la-infraestructura-de-un-paquete.html"><a href="creando-la-infraestructura-de-un-paquete.html#rcmdcheck"><i class="fa fa-check"></i><b>3.3.2</b> rcmdcheck</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="creando-la-infraestructura-de-un-paquete.html"><a href="creando-la-infraestructura-de-un-paquete.html#modificando-el-archivo-description"><i class="fa fa-check"></i><b>3.4</b> Modificando el archivo DESCRIPTION</a></li>
+<li class="chapter" data-level="3.5" data-path="creando-la-infraestructura-de-un-paquete.html"><a href="creando-la-infraestructura-de-un-paquete.html#modificando-el-archivo-news"><i class="fa fa-check"></i><b>3.5</b> Modificando el archivo NEWS</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="creando-mis-primeras-funciones.html"><a href="creando-mis-primeras-funciones.html"><i class="fa fa-check"></i><b>4</b> Creando mis primeras funciones</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="creando-mis-primeras-funciones.html"><a href="creando-mis-primeras-funciones.html#diapositivas-3"><i class="fa fa-check"></i><b>4.1</b> Diapositivas</a></li>
+<li class="chapter" data-level="4.2" data-path="creando-mis-primeras-funciones.html"><a href="creando-mis-primeras-funciones.html#nombre-de-la-función"><i class="fa fa-check"></i><b>4.2</b> Nombre de la función</a></li>
+<li class="chapter" data-level="4.3" data-path="creando-mis-primeras-funciones.html"><a href="creando-mis-primeras-funciones.html#estructura-de-la-función"><i class="fa fa-check"></i><b>4.3</b> Estructura de la función</a></li>
+<li class="chapter" data-level="4.4" data-path="creando-mis-primeras-funciones.html"><a href="creando-mis-primeras-funciones.html#tu-turno"><i class="fa fa-check"></i><b>4.4</b> ¡Tu turno!</a></li>
+<li class="chapter" data-level="4.5" data-path="creando-mis-primeras-funciones.html"><a href="creando-mis-primeras-funciones.html#argumentos"><i class="fa fa-check"></i><b>4.5</b> Argumentos</a></li>
+<li class="chapter" data-level="4.6" data-path="creando-mis-primeras-funciones.html"><a href="creando-mis-primeras-funciones.html#tu-turno-1"><i class="fa fa-check"></i><b>4.6</b> ¡Tu turno!</a></li>
+<li class="chapter" data-level="4.7" data-path="creando-mis-primeras-funciones.html"><a href="creando-mis-primeras-funciones.html#indentación"><i class="fa fa-check"></i><b>4.7</b> Indentación</a></li>
+<li class="chapter" data-level="4.8" data-path="creando-mis-primeras-funciones.html"><a href="creando-mis-primeras-funciones.html#uso-de-espacios"><i class="fa fa-check"></i><b>4.8</b> Uso de espacios</a></li>
+<li class="chapter" data-level="4.9" data-path="creando-mis-primeras-funciones.html"><a href="creando-mis-primeras-funciones.html#comentarios"><i class="fa fa-check"></i><b>4.9</b> Comentarios</a></li>
+<li class="chapter" data-level="4.10" data-path="creando-mis-primeras-funciones.html"><a href="creando-mis-primeras-funciones.html#mensajes-para-el-usuario"><i class="fa fa-check"></i><b>4.10</b> Mensajes para el usuario</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="documentación-de-funciones.html"><a href="documentación-de-funciones.html"><i class="fa fa-check"></i><b>5</b> Documentación de funciones</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="documentación-de-funciones.html"><a href="documentación-de-funciones.html#diapositivas-4"><i class="fa fa-check"></i><b>5.1</b> Diapositivas</a></li>
+<li class="chapter" data-level="5.2" data-path="documentación-de-funciones.html"><a href="documentación-de-funciones.html#links-importantes"><i class="fa fa-check"></i><b>5.2</b> Links importantes:</a></li>
+<li class="chapter" data-level="5.3" data-path="documentación-de-funciones.html"><a href="documentación-de-funciones.html#qué-es-la-documentación-de-una-función-y-por-qué-es-importante"><i class="fa fa-check"></i><b>5.3</b> ¿Qué es la documentación de una función y por qué es importante?</a></li>
+<li class="chapter" data-level="5.4" data-path="documentación-de-funciones.html"><a href="documentación-de-funciones.html#generacion-de-la-documentacion-con-ayuda-del-paquete-roxygen"><i class="fa fa-check"></i><b>5.4</b> Generacion de la documentacion con ayuda del paquete roxygen</a></li>
+<li class="chapter" data-level="5.5" data-path="documentación-de-funciones.html"><a href="documentación-de-funciones.html#antes-de-empezar"><i class="fa fa-check"></i><b>5.5</b> Antes de empezar…✏️</a></li>
+<li class="chapter" data-level="5.6" data-path="documentación-de-funciones.html"><a href="documentación-de-funciones.html#generacion-de-un-bloque-de-documentacion-con-ayuda-del-paquete-roxygen."><i class="fa fa-check"></i><b>5.6</b> Generacion de un bloque de documentacion con ayuda del paquete roxygen.</a></li>
+<li class="chapter" data-level="5.7" data-path="documentación-de-funciones.html"><a href="documentación-de-funciones.html#otros-campos-de-la-documentacion."><i class="fa fa-check"></i><b>5.7</b> Otros campos de la documentacion.</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="diseño-de-pruebas.html"><a href="diseño-de-pruebas.html"><i class="fa fa-check"></i><b>6</b> Diseño de pruebas</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="diseño-de-pruebas.html"><a href="diseño-de-pruebas.html#diapositivas-5"><i class="fa fa-check"></i><b>6.1</b> Diapositivas</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="creación-de-viñetas.html"><a href="creación-de-viñetas.html"><i class="fa fa-check"></i><b>7</b> Creación de viñetas</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="creación-de-viñetas.html"><a href="creación-de-viñetas.html#qué-es-una-viñetavignette"><i class="fa fa-check"></i><b>7.1</b> ¿Qué es una viñeta/vignette? 📝✨</a></li>
+<li class="chapter" data-level="7.2" data-path="creación-de-viñetas.html"><a href="creación-de-viñetas.html#características-de-una-vignette"><i class="fa fa-check"></i><b>7.2</b> Características de una vignette 🌟</a></li>
+<li class="chapter" data-level="7.3" data-path="creación-de-viñetas.html"><a href="creación-de-viñetas.html#cómo-consultar-la-viñeta-de-un-paquete"><i class="fa fa-check"></i><b>7.3</b> ¿Cómo consultar la viñeta de un paquete? ❓🔍</a></li>
+<li class="chapter" data-level="7.4" data-path="creación-de-viñetas.html"><a href="creación-de-viñetas.html#cómo-crear-una-viñeta"><i class="fa fa-check"></i><b>7.4</b> ¿Cómo crear una viñeta? ❓🔍</a></li>
+<li class="chapter" data-level="7.5" data-path="creación-de-viñetas.html"><a href="creación-de-viñetas.html#cómo-guardar-y-actualizar-la-viñeta"><i class="fa fa-check"></i><b>7.5</b> ¿Cómo guardar y actualizar la viñeta? 🔄💻</a></li>
+<li class="chapter" data-level="7.6" data-path="creación-de-viñetas.html"><a href="creación-de-viñetas.html#veamos-un-ejemplo"><i class="fa fa-check"></i><b>7.6</b> Veamos un ejemplo 🔍👨‍💻</a></li>
+<li class="chapter" data-level="7.7" data-path="creación-de-viñetas.html"><a href="creación-de-viñetas.html#actividad-3"><i class="fa fa-check"></i><b>7.7</b> Actividad</a>
+<ul>
+<li class="chapter" data-level="7.7.1" data-path="creación-de-viñetas.html"><a href="creación-de-viñetas.html#ejercicio-1-identificación-de-viñetas-en-paquetes-de-interés-en-bioconductor"><i class="fa fa-check"></i><b>7.7.1</b> Ejercicio 1: Identificación de viñetas en paquetes de interés en Bioconductor 📚🔍</a></li>
+<li class="chapter" data-level="7.7.2" data-path="creación-de-viñetas.html"><a href="creación-de-viñetas.html#ejercicio-2-creación-de-viñetas-en-r"><i class="fa fa-check"></i><b>7.7.2</b> Ejercicio 2: Creación de viñetas en R 🛠️📄</a></li>
+<li class="chapter" data-level="7.7.3" data-path="creación-de-viñetas.html"><a href="creación-de-viñetas.html#preguntas-de-reflexión"><i class="fa fa-check"></i><b>7.7.3</b> Preguntas de Reflexión 🤔💭</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="introducción-a-conda..html"><a href="introducción-a-conda..html"><i class="fa fa-check"></i><b>8</b> Introducción a Conda.</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="introducción-a-conda..html"><a href="introducción-a-conda..html#qué-es-conda"><i class="fa fa-check"></i><b>8.1</b> ¿Qué es conda?</a></li>
+<li class="chapter" data-level="8.2" data-path="introducción-a-conda..html"><a href="introducción-a-conda..html#conda-101"><i class="fa fa-check"></i><b>8.2</b> <code>conda</code> 101</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="el-grupo-de-datos.html"><a href="el-grupo-de-datos.html"><i class="fa fa-check"></i><b>9</b> El grupo de datos</a>
+<ul>
+<li class="chapter" data-level="9.0.1" data-path="el-grupo-de-datos.html"><a href="el-grupo-de-datos.html#datos"><i class="fa fa-check"></i><b>9.0.1</b> Datos</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html"><i class="fa fa-check"></i><b>10</b> Mapeo y Binning</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#secuenciación"><i class="fa fa-check"></i><b>10.1</b> Secuenciación</a></li>
+<li class="chapter" data-level="10.2" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#control-de-calidad"><i class="fa fa-check"></i><b>10.2</b> Control de calidad</a></li>
+<li class="chapter" data-level="10.3" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#ensamble"><i class="fa fa-check"></i><b>10.3</b> Ensamble</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#discutamos"><i class="fa fa-check"></i><b>10.3.1</b> Discutamos</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#mapeo"><i class="fa fa-check"></i><b>10.4</b> Mapeo</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#discutamos-1"><i class="fa fa-check"></i><b>10.4.1</b> Discutamos</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#binning"><i class="fa fa-check"></i><b>10.5</b> Binning</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#maxbin"><i class="fa fa-check"></i><b>10.5.1</b> MaxBin</a></li>
+<li class="chapter" data-level="10.5.2" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#metabat"><i class="fa fa-check"></i><b>10.5.2</b> MetaBat</a></li>
+<li class="chapter" data-level="10.5.3" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#concoct"><i class="fa fa-check"></i><b>10.5.3</b> CONCOCT</a></li>
+<li class="chapter" data-level="10.5.4" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#discutamos-2"><i class="fa fa-check"></i><b>10.5.4</b> Discutamos</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#refinamiento"><i class="fa fa-check"></i><b>10.6</b> Refinamiento</a>
+<ul>
+<li class="chapter" data-level="10.6.1" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#dastool"><i class="fa fa-check"></i><b>10.6.1</b> DASTool</a></li>
+<li class="chapter" data-level="10.6.2" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#checkm"><i class="fa fa-check"></i><b>10.6.2</b> CheckM</a></li>
+<li class="chapter" data-level="10.6.3" data-path="mapeo-y-binning.html"><a href="mapeo-y-binning.html#mis-bins"><i class="fa fa-check"></i><b>10.6.3</b> Mis Bins</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="asignación-taxonómica.html"><a href="asignación-taxonómica.html"><i class="fa fa-check"></i><b>11</b> Asignación taxonómica</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="asignación-taxonómica.html"><a href="asignación-taxonómica.html#leamos-los-datos"><i class="fa fa-check"></i><b>11.1</b> Leamos los datos</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="inferencia-metabólica.html"><a href="inferencia-metabólica.html"><i class="fa fa-check"></i><b>12</b> Inferencia metabólica</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="inferencia-metabólica.html"><a href="inferencia-metabólica.html#keeg"><i class="fa fa-check"></i><b>12.1</b> KEEG</a></li>
+<li class="chapter" data-level="12.2" data-path="inferencia-metabólica.html"><a href="inferencia-metabólica.html#explorando-el-metabolismo-con-rbims."><i class="fa fa-check"></i><b>12.2</b> Explorando el metabolismo con rbims.</a></li>
+<li class="chapter" data-level="12.3" data-path="inferencia-metabólica.html"><a href="inferencia-metabólica.html#anotación-con-interproscan"><i class="fa fa-check"></i><b>12.3</b> Anotación con InterproScan</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="inferencia-metabólica.html"><a href="inferencia-metabólica.html#finalmente-podemos-escribir-esto-en-una-tabla."><i class="fa fa-check"></i><b>12.3.1</b> Finalmente podemos escribir esto en una tabla.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="proyectos-colaborativos-1.html"><a href="proyectos-colaborativos-1.html"><i class="fa fa-check"></i><b>13</b> Proyectos colaborativos</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="proyectos-colaborativos-1.html"><a href="proyectos-colaborativos-1.html#propuesta-1"><i class="fa fa-check"></i><b>13.1</b> Propuesta 1</a></li>
+<li class="chapter" data-level="13.2" data-path="proyectos-colaborativos-1.html"><a href="proyectos-colaborativos-1.html#propuesta-2"><i class="fa fa-check"></i><b>13.2</b> Propuesta 2</a></li>
+<li class="chapter" data-level="13.3" data-path="proyectos-colaborativos-1.html"><a href="proyectos-colaborativos-1.html#propuesta-3"><i class="fa fa-check"></i><b>13.3</b> Propuesta 3</a></li>
+<li class="chapter" data-level="13.4" data-path="proyectos-colaborativos-1.html"><a href="proyectos-colaborativos-1.html#propuesta-4"><i class="fa fa-check"></i><b>13.4</b> Propuesta 4</a></li>
+<li class="chapter" data-level="13.5" data-path="proyectos-colaborativos-1.html"><a href="proyectos-colaborativos-1.html#propuesta-5"><i class="fa fa-check"></i><b>13.5</b> Propuesta 5</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Creación de paquetes de R/Bioconductor para el análisis de metagenomas.</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="creación-de-viñetas" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">7</span> Creación de viñetas<a href="creación-de-viñetas.html#creación-de-viñetas" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>José Antonio Ovando Ricárdez</p>
+<p>05 de agosto de 2025</p>
+<style>
+
+div.color { 
+border-radius: 5px; 
+padding: 20px;
+margin: 30px 0px 30px;}
+
+div.red { background-color:#f67155; }
+
+div.orange{ background-color:#f0BB51;}
+
+div.pair {  
+display: flex;
+flex-direction: row;
+justify-content: center;
+text-align:center;
+padding:0px}
+
+div.inside { width: 49%; padding: 0px}
+
+div.scroll { 
+max-height: 400px; 
+overflow-y: auto; 
+background: #111111;
+border-radius:5px;
+padding: 10px;
+margin: 30px 0px 30px;
+color: #999999;}
+
+div.alert{color:#bd475d; background-color:transparent}
+</style>
+<div id="qué-es-una-viñetavignette" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> ¿Qué es una viñeta/vignette? 📝✨<a href="creación-de-viñetas.html#qué-es-una-viñetavignette" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Es una guía extendida sobre cómo funciona el paquete. Es recomendable que muestre cómo utilizar las funciones del paquete, aplicado en un flujo de trabajo; por ejemplo: el análisis estadístico de una encuesta 📊 o el análisis de expresión diferencial de genes.</p>
+<p>Podemos estructurarlo como haríamos con la escritura de un capítulo de libro o de un artículo científico: debe mostrar el problema a resolver y la metodología paso a paso sobre cómo el paquete lo resuelve.</p>
+<p>Si el paquete contiene funciones que se complementan entre sí para alcanzar un fin específico, entonces debes mostrar su uso de forma compartamentalizada.</p>
+</div>
+<div id="características-de-una-vignette" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Características de una vignette 🌟<a href="creación-de-viñetas.html#características-de-una-vignette" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Debe mostrar un flujo de análisis explotando el potencial de tu paquete 📊🚀.</li>
+<li>Implementa tantas funciones de tu paquete como sea posible, pero no es necesario que incluya todas 🛠️✨.</li>
+<li>Los datos a usar deben ser pequeños o fáciles de acceder 📂🔍.</li>
+<li>Puedes crear múltiples viñetas para mostrar diferentes casos de análisis y cubrir una mayor cantidad de funciones 📝📚.</li>
+</ul>
+</div>
+<div id="cómo-consultar-la-viñeta-de-un-paquete" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> ¿Cómo consultar la viñeta de un paquete? ❓🔍<a href="creación-de-viñetas.html#cómo-consultar-la-viñeta-de-un-paquete" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="creación-de-viñetas.html#cb66-1" tabindex="-1"></a><span class="fu">browseVignettes</span>(<span class="at">package =</span> <span class="st">&quot;ggplot2&quot;</span>)</span></code></pre></div>
+</div>
+<div id="cómo-crear-una-viñeta" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> ¿Cómo crear una viñeta? ❓🔍<a href="creación-de-viñetas.html#cómo-crear-una-viñeta" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="creación-de-viñetas.html#cb67-1" tabindex="-1"></a>biocthis<span class="sc">::</span><span class="fu">use_bioc_vignette</span>(<span class="st">&quot;mi_vignette&quot;</span>)</span></code></pre></div>
+<p>Esta función tendrá tres efectos ✨:</p>
+<ul>
+<li>Generar el directorio <strong>vignettes</strong> en caso que no exista 📂🔧.</li>
+<li>Agregar dependencias en el archivo <strong>DESCRIPTION</strong> (por ejemplo, <em>knitr</em> necesario para construir viñetas dentro del paquete) 📄📦.</li>
+<li>Abrir un template en formato <strong>.Rmd</strong> para comenzar a escribir la viñeta, que se va a guardar en <strong>vignettes/mi_vignette.Rmd</strong> 📝💾.</li>
+</ul>
+</div>
+<div id="cómo-guardar-y-actualizar-la-viñeta" class="section level2 hasAnchor" number="7.5">
+<h2><span class="header-section-number">7.5</span> ¿Cómo guardar y actualizar la viñeta? 🔄💻<a href="creación-de-viñetas.html#cómo-guardar-y-actualizar-la-viñeta" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Una vez que se ha generado el archivo <strong>vignettes/mi_vignette.Rmd</strong>, se hacen las modificaciones necesarias. Puedes usar el comando:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="creación-de-viñetas.html#cb68-1" tabindex="-1"></a><span class="fu">edit_file</span>(<span class="st">&quot;vignettes/mi_vignette.Rmd&quot;</span>)</span></code></pre></div>
+<p>Para guardar los cambios, debes hacer clic en el botón <strong>Knit</strong> o utiliza la combinación de teclas <strong>Ctrl/Cmd-Shift-K</strong> 💾✨.</p>
+</div>
+<div id="veamos-un-ejemplo" class="section level2 hasAnchor" number="7.6">
+<h2><span class="header-section-number">7.6</span> Veamos un ejemplo 🔍👨‍💻<a href="creación-de-viñetas.html#veamos-un-ejemplo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Busca la viñeta del paquete <strong>regutools</strong> en la página de Bioconductor 🌐:</p>
+<p><a href="https://bioconductor.org/packages/release/bioc/html/regutools.html">Viñeta de regutools en Bioconductor</a> 📦📄</p>
+<p><img src="img/regutools.png" width="50%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="actividad-3" class="section level2 hasAnchor" number="7.7">
+<h2><span class="header-section-number">7.7</span> Actividad<a href="creación-de-viñetas.html#actividad-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="ejercicio-1-identificación-de-viñetas-en-paquetes-de-interés-en-bioconductor" class="section level3 hasAnchor orange color" number="7.7.1">
+<h3><span class="header-section-number">7.7.1</span> Ejercicio 1: Identificación de viñetas en paquetes de interés en Bioconductor 📚🔍<a href="creación-de-viñetas.html#ejercicio-1-identificación-de-viñetas-en-paquetes-de-interés-en-bioconductor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>En equipos selecciona dos paquetes almacenados en Bioconductor que sean de tu interés y responde las siguientes preguntas:</p>
+<ul>
+<li><p>¿Ambos paquetes incluyen viñetas? 📝❓</p></li>
+<li><p>¿Qué aspectos de la viñeta del paquete A versus el paquete B te llaman más la atención? 🔍🤔</p></li>
+<li><p>¿Consideras que alguna viñeta está mejor desarrollada que la otra? Explica por qué 💭📊.</p></li>
+</ul></li>
+</ul>
+</div>
+<div id="ejercicio-2-creación-de-viñetas-en-r" class="section level3 hasAnchor orange color" number="7.7.2">
+<h3><span class="header-section-number">7.7.2</span> Ejercicio 2: Creación de viñetas en R 🛠️📄<a href="creación-de-viñetas.html#ejercicio-2-creación-de-viñetas-en-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pasos:</p>
+<ol style="list-style-type: decimal">
+<li>Cargar los paquetes necesarios</li>
+</ol>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="creación-de-viñetas.html#cb69-1" tabindex="-1"></a><span class="fu">library</span>(usethis)</span>
+<span id="cb69-2"><a href="creación-de-viñetas.html#cb69-2" tabindex="-1"></a><span class="fu">library</span>(biocthis)</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Crear un nuevo paquete de R (si no tienes uno ya creado)</li>
+</ol>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="creación-de-viñetas.html#cb70-1" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">create_package</span>(<span class="st">&quot;CDSB2024&quot;</span>)</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>Configurar el paquete para Bioconductor</li>
+</ol>
+<p>Ejecuta el siguiente comando para configurar el paquete con las mejores prácticas de Bioconductor:</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="creación-de-viñetas.html#cb71-1" tabindex="-1"></a>biocthis<span class="sc">::</span><span class="fu">use_bioc_pkg_templates</span>()</span></code></pre></div>
+<p>Esto agregará varios archivos de configuración y plantillas útiles para trabajar con Bioconductor.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Crear una viñeta con biocthis</li>
+</ol>
+<p>Ejecuta el siguiente comando para agregar una viñeta en formato R Markdown. Cambia “mi_vignette” por el título de la viñeta que prefieran.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="creación-de-viñetas.html#cb72-1" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_vignette</span>(<span class="st">&quot;mi_vignette_usethis&quot;</span>)</span>
+<span id="cb72-2"><a href="creación-de-viñetas.html#cb72-2" tabindex="-1"></a>biocthis<span class="sc">::</span><span class="fu">use_bioc_vignette</span>(<span class="st">&quot;mi_vignette_biocthis&quot;</span>)</span></code></pre></div>
+<p>Esto creará un archivo R Markdown en la carpeta vignettes/ dentro del paquete.</p>
+<ol start="5" style="list-style-type: decimal">
+<li>Editar la viñeta</li>
+</ol>
+<p>Abre el archivo creado en vignettes .Rmd. Incluye contenido que describa una función del paquete.</p>
+<ol start="6" style="list-style-type: decimal">
+<li>Abrir la viñeta en el navegador y renderiza el archivo .Rmd</li>
+</ol>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="creación-de-viñetas.html#cb73-1" tabindex="-1"></a><span class="fu">browseVignettes</span>(<span class="st">&quot;CDSB2024&quot;</span>)</span></code></pre></div>
+</div>
+<div id="preguntas-de-reflexión" class="section level3 hasAnchor" number="7.7.3">
+<h3><span class="header-section-number">7.7.3</span> Preguntas de Reflexión 🤔💭<a href="creación-de-viñetas.html#preguntas-de-reflexión" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>¿Cuál es la ventaja de documentar ejemplos de uso en una viñeta? 📚✨</p></li>
+<li><p>¿Qué estructura consideras útil para presentar ejemplos en una viñeta? 🏗️🔍</p></li>
+<li><p>¿Cómo aplicarías esta clase en tu proyecto colaborativo? 🤝📈</p></li>
+</ul>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="diseño-de-pruebas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introducción-a-conda..html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

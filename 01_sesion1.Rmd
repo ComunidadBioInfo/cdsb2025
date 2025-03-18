@@ -1,0 +1,13 @@
+# Keynote
+
+Instructor/a
+
+04 de agosto de 2025
+
+## Diapositivas
+
+[
+```{r,echo=FALSE}
+knitr::include_url("https://comunidadbioinfo.github.io/cdsb2025/brett_talk.pdf", height = "380px")
+```
+](https://comunidadbioinfo.github.io/cdsb2025/brett_talk.pdf)

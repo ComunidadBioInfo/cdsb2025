@@ -1,0 +1,89 @@
+---
+title: "Creación de paquetes de R/Bioconductor para el análisis de metagenomas."
+author: "Dra. Mirna Vázquez Rosas-Landa, Dra. Joselyn Cristina Chávez Fuentes, M.C. Erick Cuevas Fernández"
+site: bookdown::bookdown_site
+documentclass: book
+url: 'https://comunidadbioinfo.github.io/cdsb2025/'
+github-repo: "comunidadbioinfo/cdsb2025"
+output:
+  bookdown::gitbook: default
+  
+---
+
+# Bienvenida {-}
+
+[
+```{r, echo=FALSE}
+knitr::include_url("https://comunidadbioinfo.github.io/cdsb2024/bienvenida.html",
+  height = "380px")
+```
+](https://comunidadbioinfo.github.io/cdsb2025/bienvenida.html)
+
+
+Les damos la bienvenida al Workshop Creación de paquetes de R/Bioconductor para el análisis de metagenomas! 
+
+<p align="justify">
+En los últimos años la metagenómica ha cobrado una gran importancia para  el descubrimiento de nuevos grupos microorganismos y rutas metabólicas. En este taller revisaremos los métodos más recientes para analizar datos metagenómicos, usando herramientas de software libre y paquetes de R especializados que están disponibles libremente vía Bioconductor. 
+
+Durante este taller aprenderás a reconstruir genomas a partir de metagenomas utilizando diferentes herramientas de software libre y revisaremos diferentes estrategias de binning y predicción metabólica. Adicionalmente, identificaremos áreas de oportunidad para el desarrollo de software en metagenómica y aprenderás los pasos para crear tus propios paquetes para generar herramientas que resuelvan estas problemáticas actuales.
+
+
+
+## Instructores
+
+- [Dra. Mirna Vázquez Rosas Landa](https://comunidadbioinfo.github.io/es/authors/mirnavrl/): Investigadora en el Instituto de Ciencias de Mar y Limnología de la UNAM.
+- [Dra. Joselyn Cristina Chávez Fuentes](https://comunidadbioinfo.github.io/es/authors/josschavezf/): Estancia Postdoctoral en Icahn School of Medicine at Mount Sinai.
+- [Dra. Yalbi I. Balderas-Martínez](https://comunidadbioinfo.github.io/es/authors/yalbibalderas/): Investigadora en el Instituto Nacional de Enfermedades Respiratorias Ismael Cosío Villegas.
+- [M.C. Erick Cuevas Fernández](https://comunidadbioinfo.github.io/es/authors/erickcufe/): Estudiante de Doctorado en la Universidad Nacional Autónoma de México.
+- [M.C. José Antonio Ovando Ricárdez](https://comunidadbioinfo.github.io/es/authors/joseovando/): Estudiante de Doctorado en el Instituto Nacional de Enfermedades Respiratorias Ismael Cosío Villegas.
+
+## Ayudantes
+
+
+## Temario 
+
+Consulta el calendario de este curso en: <https://bit.ly/calendarcdsb2025>
+
+- Día 1: Estructura general de un paquete
+  - Presentación a la CDSB.
+  - Plática: La última versión del árbol de la vida y la metagenómica.
+  - Control de versiones con GitHub y RStudio.
+  - Creando la infraestructura de un paquete.
+
+- Día 2:  Documentación de un paquete 
+  - Creando mis primeras funciones.
+  - Documentación de funciones.
+  - Diseño de pruebas.
+  - Creación de viñetas.
+  - Introducción a Conda
+
+- Día 3: Reconstrucción de genomas
+  - El grupo de datos.
+  - Mapeo y Binning.
+  - Asignación taxonómica.
+
+- Día 4: Reconstrucción metabólica e inferencia filogenética
+  - Análisis de vías metabólicas. 
+  - MEBs (Multigenomic Entropy Based Score pipeline ) 
+  - Proyectos colaborativos de metagenomas.
+
+- Día 5:
+  - Proyectos colaborativos de metagenomas.
+  - Presentación de proyecto.
+  - Clausura.
+
+## Patrocinadores
+
+Agradecemos a nuestros patrocinadores:
+
+[<img src="http://www.nnb.unam.mx/TIB2020/wp-content/uploads/sites/2/2020/03/RMB_Logo-horizontal.png" width="250px" />](https://www.redmexicanadebioinformatica.org/)
+
+[<img src="https://www.nnb.unam.mx/wp-content/uploads/2021/04/logo-principal.png" width="250px" />](https://www.nnb.unam.mx)
+
+
+## Licencia
+
+Este material posee una licencia tipo Creative Commons Attribution-ShareAlike 4.0 International License. 
+
+Para conocer más sobre esta licencia, visite http://creativecommons.org/licenses/by-sa/4.0/
+
